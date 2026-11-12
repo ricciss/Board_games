@@ -1,31 +1,28 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SoundEffectScript : MonoBehaviour
 {
     public AudioClip[] audioClips;
     public AudioSource effectsSource;
 
-    public void Hover()
+    const string VolumeKey = "SfxVolume";
+
+    // Kopīgs efektu skaļums visām ainām (saglabājas arī pēc spēles aizvēršanas)
+    public static float Volume
     {
-        if(audioClips.Length > 0)
-        {
-            effectsSource.PlayOneShot(audioClips[0]);
-        }
+        get { return PlayerPrefs.GetFloat(VolumeKey, 1f); }
+        set { PlayerPrefs.SetFloat(VolumeKey, Mathf.Clamp01(value)); }
     }
 
-    public void Click()
+    void Play(int index)
     {
-        if (audioClips.Length > 0)
-        {
-            effectsSource.PlayOneShot(audioClips[1]);
-        }
+        if (effectsSource == null || audioClips == null || index >= audioClips.Length) return;
+        if (audioClips[index] == null) return;
+
+        effectsSource.PlayOneShot(audioClips[index], Volume);
     }
 
-    public void OnDice()
-    {
-        if (audioClips.Length > 0)
-        {
-            effectsSource.PlayOneShot(audioClips[2]);
-        }
-    }
+    public void Hover() { Play(0); }
+    public void Click() { Play(1); }
+    public void OnDice() { Play(2); }
 }

@@ -17,9 +17,22 @@ public class MusicPlayer : MonoBehaviour
     private bool started = false;
 
     private static MusicPlayer instance;
+    public static MusicPlayer Instance => instance; // lai Settings aina var piekļūt mūzikai
+
+    const string VolumeKey = "MusicVolume";
+
+    // Maina skaļumu un saglabā to (paliek arī pēc spēles aizvēršanas)
+    public void SetVolume(float value)
+    {
+        volume = Mathf.Clamp01(value);
+        PlayerPrefs.SetFloat(VolumeKey, volume);
+    }
 
     void Awake()
     {
+        // Ielādē saglabāto skaļumu (ja tāda nav, paliek Inspector vērtība)
+        volume = PlayerPrefs.GetFloat(VolumeKey, volume);
+
         if (keepBetweenScenes)
         {
             // Lai, atgriežoties ainā, neveidojas otrs mūzikas atskaņotājs
@@ -94,7 +107,24 @@ public class MusicPlayer : MonoBehaviour
         audioSource.Play();
         started = true;
         isPaused = false;
+
+        if (OnSongChanged != null) OnSongChanged();
     }
+
+    // Paziņo citiem skriptiem (piem. Settings), ka dziesma nomainījās
+    public event System.Action OnSongChanged;
+
+    public string CurrentSongName
+    {
+        get
+        {
+            if (audioSource == null || audioSource.clip == null) return "-";
+            return audioSource.clip.name;
+        }
+    }
+
+    public int CurrentIndex => currentIndex;
+    public int SongCount => songs == null ? 0 : songs.Length;
 
     public void NextSong()
     {

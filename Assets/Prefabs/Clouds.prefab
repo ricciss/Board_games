@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2133657689003689263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3962562823925246303}
+  - component: {fileID: 3416740818542541460}
+  m_Layer: 5
+  m_Name: Clouds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3962562823925246303
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133657689003689263}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3416740818542541460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133657689003689263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad1c491a7eafd9458c9f424b3e80fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloudSprites:
+  - {fileID: -2024052705, guid: 2c1a804fb78541a4faa7b651dbc8d69c, type: 3}
+  - {fileID: -791547238, guid: 2c1a804fb78541a4faa7b651dbc8d69c, type: 3}
+  - {fileID: 828823008, guid: 2c1a804fb78541a4faa7b651dbc8d69c, type: 3}
+  - {fileID: -230790268, guid: 2c1a804fb78541a4faa7b651dbc8d69c, type: 3}
+  - {fileID: -1512444017, guid: 2c1a804fb78541a4faa7b651dbc8d69c, type: 3}
+  cloudCount: 8
+  minSpeed: 15
+  maxSpeed: 45
+  moveRight: 1
+  randomDirection: 0
+  bobAmount: 8
+  bobSpeed: 0.6
+  cloudSize: 0.15
+  minScale: 0.6
+  maxScale: 1.3
+  minAlpha: 0.7
+  maxAlpha: 1
+  minHeight: 0.1
+  maxHeight: 0.95
