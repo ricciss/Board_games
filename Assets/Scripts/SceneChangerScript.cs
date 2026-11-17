@@ -1,9 +1,62 @@
 ﻿using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System;
 
 public class SceneChangerScript : MonoBehaviour
 {
+    public SaveLoadScript saveLoadScript;
+    public FadeScript fadeScript;
+
+    public void CloseGame()
+    {
+        StartCoroutine(Delay("quit", -1, "", -1));
+    }
+
+    public IEnumerator Delay(string action, int charIndex, string playerName, int playerCount)
+    {
+        if (string.Equals(action, "quit", StringComparison.OrdinalIgnoreCase))
+        {
+            yield return new WaitForSeconds(0.5f);
+            PlayerPrefs.DeleteAll();
+
+            if (UnityEditor.EditorApplication.isPlaying)
+                UnityEditor.EditorApplication.isPlaying = false;
+            else
+            {
+                yield return fadeScript.FadeOut(0.5f);
+                Application.Quit();
+            }
+        
+    }   else if (string.Equals(action, "play", StringComparison.OrdinalIgnoreCase))
+        {
+            yield return fadeScript.FadeOut(0.5f);
+            saveLoadScript.SavePlayerData(charIndex, playerName, playerCount);
+            SceneManager.LoadScene(2, LoadSceneMode.Single);
+        }
+        else if (string.Equals(action, "settings", StringComparison.OrdinalIgnoreCase))
+        {
+            yield return fadeScript.FadeOut(0.5f);
+            //saveLoadScript.SavePlayerData(charIndex, playerName, playerCount);
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
+
+        }   else if (string.Equals(action, "menu", StringComparison.OrdinalIgnoreCase))
+        {
+            yield return fadeScript.FadeOut(0.5f);
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
+        }
+
+    }
+
+    public void ToMainMenu()
+    {
+        StartCoroutine(Delay("menu", -1, "", -1));
+    }
+
+    public void ExitGame()
+    {
+        StartCoroutine(Exit());
+    }
     [Tooltip("Cik ilgi gaidīt pirms ainas maiņas (lai paspēj nospēlēt klikšķa skaņa)")]
     public float delay = 0.3f;
 
@@ -15,7 +68,8 @@ public class SceneChangerScript : MonoBehaviour
 
     public void OpenSettings()
     {
-        LoadScene("Settings");
+        StartCoroutine(Delay("settings", -1, "", -1));
+       
     }
 
     public void BackToMenu()
@@ -29,10 +83,7 @@ public class SceneChangerScript : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void ExitGame()
-    {
-        StartCoroutine(Exit());
-    }
+    
 
     IEnumerator Exit()
     {
