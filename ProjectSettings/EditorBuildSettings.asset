@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Settings.unity
     guid: fd26bc5265f0c4d45b6eb6d8c6fb48ec
+  - enabled: 1
+    path: Assets/Scenes/Circus.unity
+    guid: a0e9ce4bf94cd3445b6a3665814f7da3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

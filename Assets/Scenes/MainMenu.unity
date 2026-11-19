@@ -6042,6 +6042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1799935940}
   - component: {fileID: 1799935941}
+  - component: {fileID: 1799935942}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -6085,6 +6086,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window2: {fileID: 1415365963}
+--- !u!114 &1799935942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799935939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba65aa5ef4d5ed44dac950b5f057b5f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 0.1
+  JigPosition: 1
+  positionJigAmount: {x: 20, y: 35, z: 0}
+  positionFrequency: 10
+  jigRotation: 1
+  rotationJigAmount: {x: 0, y: 0, z: 20}
+  rotationFrequency: 17.4
+  jigScale: 0
+  scaleJigAmount: {x: 0, y: 0, z: 0}
+  scaleFrequency: 10
 --- !u!1 &1815236892
 GameObject:
   m_ObjectHideFlags: 0

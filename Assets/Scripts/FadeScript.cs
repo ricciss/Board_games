@@ -22,7 +22,7 @@ public class FadeScript : MonoBehaviour
             tempColor = img.color;
             tempColor.a = a;
             img.color = tempColor;
-            yield return new WaitForSeconds(fadeTime);
+            yield return new WaitForSecondsRealtime(fadeTime);
         }
         img.raycastTarget = false;
     }
@@ -30,12 +30,12 @@ public class FadeScript : MonoBehaviour
     public IEnumerator FadeOut(float fadeTime)
     {
         img.raycastTarget = true;
-        for (float a = 0f; a <= 1.05f; a += 0.3f)
+        for (float a = 0f; a <= 1.05f; a += 0.05f)
         {
             tempColor = img.color;
             tempColor.a = a;
             img.color = tempColor;
-            yield return new WaitForSeconds(fadeTime);
+            yield return new WaitForSecondsRealtime(fadeTime);
         }
         img.raycastTarget = false;
     }
