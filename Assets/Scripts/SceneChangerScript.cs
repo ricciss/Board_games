@@ -20,32 +20,43 @@ public class SceneChangerScript : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             PlayerPrefs.DeleteAll();
 
-            if (UnityEditor.EditorApplication.isPlaying)
-                UnityEditor.EditorApplication.isPlaying = false;
-            else
-            {
-                yield return fadeScript.FadeOut(0.1f);
-                Application.Quit();
-            }
-        
-    }   else if (string.Equals(action, "play", StringComparison.OrdinalIgnoreCase))
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            if (fadeScript != null) yield return fadeScript.FadeOut(0.1f);
+            Application.Quit();
+#endif
+        }
+        else if (string.Equals(action, "play", StringComparison.OrdinalIgnoreCase))
         {
-            yield return fadeScript.FadeOut(0.1f);
+            if (fadeScript != null) yield return fadeScript.FadeOut(0.1f);
             saveLoadScript.SavePlayerData(charIndex, playerName, playerCount);
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
         else if (string.Equals(action, "settings", StringComparison.OrdinalIgnoreCase))
         {
-            yield return fadeScript.FadeOut(0.1f);
+            if (fadeScript != null) yield return fadeScript.FadeOut(0.1f);
             //saveLoadScript.SavePlayerData(charIndex, playerName, playerCount);
             SceneManager.LoadScene(1, LoadSceneMode.Single);
 
-        }   else if (string.Equals(action, "menu", StringComparison.OrdinalIgnoreCase))
+        }
+        else if (string.Equals(action, "leaderboard", StringComparison.OrdinalIgnoreCase))
         {
-            yield return fadeScript.FadeOut(0.1f);
+            if (fadeScript != null) yield return fadeScript.FadeOut(0.1f);
+            // Pēc nosaukuma, lai nesajauktu ainu numurus (0 = izvēlne, 1 = Settings, 2 = spēle)
+            SceneManager.LoadScene("Leaderboard", LoadSceneMode.Single);
+        }
+        else if (string.Equals(action, "menu", StringComparison.OrdinalIgnoreCase))
+        {
+            if (fadeScript != null) yield return fadeScript.FadeOut(0.1f);
             SceneManager.LoadScene(0, LoadSceneMode.Single);
         }
 
+    }
+
+    public void OpenLeaderboard()
+    {
+        StartCoroutine(Delay("leaderboard", -1, "", -1));
     }
 
     public void ToMainMenu()
@@ -69,7 +80,7 @@ public class SceneChangerScript : MonoBehaviour
     public void OpenSettings()
     {
         StartCoroutine(Delay("settings", -1, "", -1));
-       
+
     }
 
     public void BackToMenu()
@@ -83,7 +94,7 @@ public class SceneChangerScript : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    
+
 
     IEnumerator Exit()
     {
